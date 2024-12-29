@@ -52,7 +52,7 @@ If we create our own panes, we can add components to them in the same way. Pleas
 
 We do the same for a label, placing it somewhere in the middle of the window. The end result looks like this.
 
-![Hello world screenshot](file:///Users/sam/Documents/wren-project/hello_world.png?msec=1735458552468)
+![hello_world](https://github.com/user-attachments/assets/b5e6b976-3c47-4d52-8736-7bacd22df342)
 
 We could streamline this particular example and omit the application class (and thus not have a way of adding application-wide methods if we need some).
 
@@ -1210,7 +1210,7 @@ myApp.run
 
 The application will look like this.
 
-![createAppscreenshotpng](file:///Users/sam/Documents/wren-project/createApp_screenshot.png?msec=1735458552457)
+![createApp_screenshot](https://github.com/user-attachments/assets/3a84fce8-0362-4b96-bd4f-fa837ac4be31)
 
 The application name is the target application, e.g. **CreateApp**, and the wren virtual machine file is the compiler/interpreter (I have two: **wgd** for debugging, and **wgp** for production use). This will be renamed to the application name in the application bundle. The version number may be entered as desired. The icon must be a MacOS icon file (e.g., **createApp.icns**). The sign is required by the Mac; you may put in whatever signature you like. The main wren file should then be given, e.g., selecte **createApp.wren**. It will be renamed in the application bundle to **main.wren** in order for the interpreter to start it automatically. Then the resources, i.e., other files that your application requires. Please enter at least **gui.wren**, and perhaps image files if you use any. The open files of type indicates which files this application can open when a file of that time is double-clicked. Your app should be able to handle them in that case. Finally, you may enter an optional copyright message,
 
