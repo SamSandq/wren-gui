@@ -86,7 +86,7 @@ wren hello_world.wren
 There are a couple of considerations to keep in mind.
 
 1. keep all files together in the same folder (or hierarchy). The wren `#import`statement will accept directory names, but it's definitely easer to use only only folder tree.
-2. the *gui.wren* file must be included using `#import "gui" for ...`, as well as any of your modules
+2. the *gui.wren* file must be included using `import "gui" for ...`, as well as any of your modules
 3. if the file name is *main.wren* it may be omitted. Wren will use this as a default; this is mainly used in real Mac applications (not invoked from the command line) as the binary in an application bundle cannot use any arguments
 4. the default directory for imports is the executable directory if invoked on the command line; in an application bundle it's the *Resources* folder.
 
