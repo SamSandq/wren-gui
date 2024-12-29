@@ -101,7 +101,7 @@ The files are
 | File | Description | Location |
 | --- | --- | --- |
 | libwren.a | wren library, generated from the distribution | ./lib |
-| libwren.d | wren debugging library, generated from the distribution | ./lib |
+| libwren\_d.a | wren debugging library, generated from the distribution | ./lib |
 | wren.h | wren header file | ./include |
 | main.c | main C driving routine | ./src |
 | wren-bindings.c | wren bindings between C and wren | ./src |
