@@ -3,6 +3,8 @@
 // Sam Sandqvist 2024
 //
 // v1.01 2024-12-15
+// v1.01 2025-01-05 Accept American spelling (e.g., Color)
+// v1.02 2025-01-05 added Application.openFilePath for getting file clicked at
 //
 
 class Set {
@@ -133,6 +135,26 @@ class Colour {
     opacity(value) {_value[3] = value}
 }
 
+class Color is Colour {
+    static blue   { [0.0, 0.0, 1.0, 1.0] }
+    static red    { [1.0, 0.0, 0.0, 1.0] }
+    static green  { [0.0, 1.0, 0.0, 1.0] }
+    static yellow { [1.0, 1.0, 0.0, 1.0] }
+    static black  { [0.0, 0.0, 0.0, 1.0] }
+    static white  { [1.0, 1.0, 1.0, 1.0] }
+    static gray       { [190/255, 190/255, 190/255, 1.0] }
+    static lightGray  { [211/255, 211/255, 211/255, 1.0] }
+    static darkGray   { [ 77/255,  77/255,  77/255, 1.0] }
+    static darkSlateGray { [47/255, 79/255, 79/255, 1.0] }
+    static gray20     { [ 51/255,  51/255,  51/255, 1.0] }
+    static gray60     { [153/255, 153/255, 153/255, 1.0] }
+    static gray70     { [178/255, 178/255, 178/255, 1.0] }
+    static gray78     { [199/255, 199/255, 199/255, 1.0] }
+    static maroon     { [128/255,     0.0,     0.0, 1.0] }
+    static brown      { [165/255,  42/255,  42/255, 1.0] }
+    static orange     { [    1.0, 165/255,     0.0, 1.0] }
+}    //accept American spelling
+
 foreign class File {
     construct fileOpen(path, mode) {}
 
@@ -236,6 +258,7 @@ class Application {
     foreign static resourcePath
     foreign static homePath
     foreign static documentsPath
+    foreign static openFilePath
     foreign static openPanel(types, multiple, directory)
     foreign static savePanel(defaultname, canCreateDirectory)
     foreign static readFile(fileName)
@@ -422,7 +445,9 @@ class Window {
         _colour = value
         setColour(_id, value)
     }
+    color = (value) { colour(value)}
     colour {_colour}
+    color {_colour}
     frame {
         _frame = getFrame(_id)
         return _frame
@@ -463,6 +488,10 @@ class Window {
         centreWindow(_id)
     }
     centre() {centre}
+    center {
+        centreWindow(_id)
+    }
+    center() {centre}
     close {
         closeWindow(_id)
     }
@@ -607,12 +636,16 @@ class Pane {
         _colour = value
         setColour(this.id, _colour)
     }
+    color { _colour }
+    color = (value) { colour = value }
     border = (value) {setBorder(this.id, value) }
     borderColour {_borderColour}
+    borderColor {_borderColour}
     borderColour = (value) {
         _borderColour = value
         setBorderColour(this.id, value)
     }
+    borderColor = (value) {borderColour = value}
     show {
         setShow(this.id, true)
     }
@@ -787,6 +820,7 @@ class PolygonPane is Pane {
         _colour = value
         setFillColour(this.id, _colour)
     }
+    color = (value) {colour = value}
     border = (value) {
         setStrokeWidth(this.id, value)
     }
@@ -795,6 +829,7 @@ class PolygonPane is Pane {
         _borderColour = value
         setStrokeColour(this.id, value)
     }
+    borderColor = (value) {borderColour = value}
     id {_id}
 }
 
@@ -807,6 +842,7 @@ class Control is Pane {
     text { getText(this.id) }
     text = (value) {setText(this.id, value.toString) }
     textColour = (value) { setTextColour(this.id, value) }
+    textColor = (value) { setTextColour(this.id, value) }
     font = (value) { setFont(this.id, value.id) }
 }
 
