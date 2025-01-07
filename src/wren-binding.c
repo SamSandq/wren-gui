@@ -80,6 +80,7 @@ void doGetExecutablePath();
 void doGetResourcePath();
 void doGetHomePath();
 void doGetDocumentsPath();
+void doGetOpenFilePath();
 void doOpenPanel();
 void doSavePanel();
 void doReadFile();
@@ -223,6 +224,7 @@ struct _bindings meths[] = {
     {"gui", "Application", true,  "resourcePath", doGetResourcePath},
     {"gui", "Application", true,  "homePath", doGetHomePath},
     {"gui", "Application", true,  "documentsPath", doGetDocumentsPath},
+    {"gui", "Application", true,  "openFilePath", doGetOpenFilePath},
     {"gui", "Application", true,  "openPanel(_,_,_)", doOpenPanel},
     {"gui", "Application", true,  "savePanel(_,_)", doSavePanel},
     {"gui", "Application", true,  "readFile(_)", doReadFile},

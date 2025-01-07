@@ -40,6 +40,7 @@ NSString *resPath;
 NSString *startup;
 NSString *homePath;
 NSString *docPath;
+NSString *openFilePath;
 
 NSWindow *createWindow();
 
@@ -987,6 +988,12 @@ void doCreateScrollPane() {
     [view setHasHorizontalScroller: YES];
     [view setLineScroll: 1];
 
+    NSView *contentView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 1000, 1000)];
+    view.documentView = contentView;
+
+    // NSClipView *clip = view.contentView;
+    // clip.backgroundColor = [NSColor grayColor];
+
     wrenEnsureSlots(vm, 1);
     setObjectInSlot(view, 0);
 }
@@ -1000,7 +1007,13 @@ void doAddPaneToScrollPane() {
 
     NSScrollView *scrollPane = (NSScrollView *) strtol(ptr1, NULL, 0);    
     NSView *view = (NSView *) strtol(ptr2, NULL, 0);
+
     [scrollPane setDocumentView: view];
+
+    NSClipView *clip = scrollPane.contentView;
+    CGColorRef layerBackgroundColor = view.layer.backgroundColor;
+    clip.backgroundColor = [NSColor colorWithCGColor:layerBackgroundColor]; //[NSColor blueColor];
+
 }
 
 //-----------------------------------------------------------------------------
@@ -2192,6 +2205,12 @@ void doGetDocumentsPath() {
 }
 
 //-----------------------------------------------------------------------------
+void doGetOpenFilePath() {
+    wrenEnsureSlots(vm, 1);
+    wrenSetSlotString(vm, 0, [openFilePath UTF8String]);
+}
+
+//-----------------------------------------------------------------------------
 //Application access to variables, Transform CATransform3D struct
 //setting a pointer to the struct in slot 0
 void transformAllocate() {
@@ -2550,20 +2569,18 @@ void initialiseGUI() {
 }
 
 //when used as a real app and you click on an associated file, this will launch to read it
-// - (BOOL) application: (NSApplication *) sender openFile: (NSString *) filename {
-//     //set info in Application
-//     Object *application = lookup2("Application", globalTable);
-//     Object *fn = newString((char *) [filename UTF8String]);
-//     application->vars = insertInTree("openFile", fn, application->vars);
+- (BOOL) application: (NSApplication *) sender openFile: (NSString *) filename {
 
-// //   NSAlert* alert = [[NSAlert alloc] init];
-// //   [alert setMessageText: [NSString stringWithUTF8String: "Kanban"]];
-// //   [alert setInformativeText: filename];
-// //
-// //     NSModalResponse response = [alert runModal];
+    openFilePath = filename;
 
-//     return YES;
-// }
+//   NSAlert* alert = [[NSAlert alloc] init];
+//   [alert setMessageText: [NSString stringWithUTF8String: "Kanban"]];
+//   [alert setInformativeText: filename];
+//
+//     NSModalResponse response = [alert runModal];
+
+    return YES;
+}
 
 //pick up colour changes in colour picker (well?)
 // - (void) changeColor: (id) sender {
