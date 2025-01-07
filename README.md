@@ -176,6 +176,12 @@ Some of these are used extensively, others not at all (but included for complete
 
 Remember to import the classes you use.
 
+---
+
+> Note that we accept both British and American spelling where appropriate, e.g., both **Colour** and **Color** are acceptable.
+
+---
+
 ### Application
 
 This is the core of the implementation, and has several getter methods for obtaining information from the system.
@@ -194,6 +200,9 @@ resourcePath      path to resources; for a terminal app it's the
                   executable path
 homePath          path to the user's home directory
 documentsPath     path to the user's document directory
+openFilePath      path to the initial file; for command line app it's the argument
+                  wren file, for full Mac apps it's the file double-clicked and
+                  specified that files of this type launch the app
 applicationSupportPath    path to the app's support folder in ~/Library/...
 commandArguments    list of strings with the command line used to start;
                     first is executable, the rest are arguments
